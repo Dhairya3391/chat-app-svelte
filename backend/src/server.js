@@ -35,6 +35,11 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('user_joined', { roomId, userId });
     });
 
+    socket.on('create_room', ({ roomId, userId }) => {
+        socket.join(roomId);
+        io.to(roomId).emit('user_joined', { roomId, userId });
+    });
+
     socket.on('send_message', ({ chatId, senderId, text }) => {
         io.to(chatId).emit('message', {
             chatId,

@@ -32,7 +32,7 @@
 	{:else}
 		<div class="mx-auto max-w-4xl space-y-8">
 			<header class="flex items-center justify-between">
-				<h1 class="text-2xl font-bold">Welcome, {$authStore.user.username}!</h1>
+				<h1 class="text-2xl font-bold">Welcome, {$authStore.user.id}!</h1>
 				<button on:click={() => authStore.logout()} class="text-red-500 hover:underline">
 					Logout
 				</button>

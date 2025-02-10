@@ -10,7 +10,7 @@ function createAuthStore() {
     return {
         subscribe,
         login: (userData) => {
-            // console.log('Logging in with userData:', userData); // Debug log
+            console.log('Logging in with userData:', userData); // Debug log
             set({
                 isAuthenticated: true,
                 user: userData,

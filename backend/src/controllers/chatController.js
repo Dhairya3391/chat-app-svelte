@@ -36,7 +36,7 @@ const chatController = {
         try {
             const { creatorId } = req.body;
             const roomId = uuidv4().substring(0, 8); // Create shorter room code
-
+            console.log(req.body);
             const newRoom = new Chat({
                 roomId,
                 participants: [creatorId],

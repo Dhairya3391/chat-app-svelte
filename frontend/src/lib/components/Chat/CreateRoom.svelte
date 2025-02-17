@@ -10,6 +10,7 @@
 			console.error('User not authenticated');
 			return;
 		}
+		// console.log($authStore.user);
 
 		try {
 			creating = true;
@@ -19,7 +20,7 @@
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					creatorId: $authStore.user.uniqueId
+					creatorId: $authStore.user.id
 				})
 			});
 

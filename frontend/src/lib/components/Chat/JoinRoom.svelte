@@ -24,7 +24,7 @@
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					userId: user.uniqueId,
+					userId: user.id,
 					roomId: roomId.trim()
 				})
 			});

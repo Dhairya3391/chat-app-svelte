@@ -35,19 +35,36 @@ const chatController = {
     createRoom: async (req, res) => {
         try {
             const { creatorId } = req.body;
-            const roomId = uuidv4().substring(0, 8); // Create shorter room code
-            console.log(req.body);
+            
+            if (!creatorId) {
+                return res.status(400).json({ 
+                    message: 'Creator ID is required' 
+                });
+            }
+
+            const roomId = uuidv4().substring(0, 8);
+            console.log('Creating room with:', { creatorId, roomId });
+
             const newRoom = new Chat({
                 roomId,
                 participants: [creatorId],
                 messages: []
             });
 
-            await newRoom.save();
-            res.status(201).json({ roomId });
+            const savedRoom = await newRoom.save();
+            console.log('Room created:', savedRoom);
+            
+            res.status(201).json({ 
+                success: true,
+                roomId: savedRoom.roomId 
+            });
 
         } catch (err) {
-            res.status(500).json({ message: 'Error creating room', error: err.message });
+            console.error('Room creation error:', err);
+            res.status(500).json({ 
+                message: 'Error creating room', 
+                error: err.message 
+            });
         }
     },
 
@@ -55,7 +72,7 @@ const chatController = {
     joinRoom: async (req, res) => {
         try {
             const { userId, roomId } = req.body;
-
+            console.log('Joining room:123', { userId, roomId });
             const room = await Chat.findOne({ roomId });
             if (!room) {
                 return res.status(404).json({ message: 'Room not found' });
